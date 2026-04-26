@@ -9,8 +9,6 @@ from aiohttp import web
 from bot.dashboard.state import dashboard_state
 from bot.utils.logger import get_logger
 
-last_room_id = None
-
 log = get_logger(__name__)
 
 DASHBOARD_DIR = os.path.dirname(os.path.abspath(__file__))
