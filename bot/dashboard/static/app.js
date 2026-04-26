@@ -50,6 +50,15 @@ function showPage(p) {
   currentPage = p;
 }
 
+let lastRoomId = null;
+// GET ROOM (INI YANG DIPAKAI EXTENSION)
+app.get('/room', (req, res) => {
+    res.json({
+        success: true,
+        room_id: lastRoomId || null
+    });
+});
+
 // ─── WebSocket with fast reconnect ───
 let ws, wsRetry = 0;
 function connectWS() {
