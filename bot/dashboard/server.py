@@ -85,7 +85,6 @@ async def _push_loop(app):
                 continue
             try:
                 snapshot = dashboard_state.get_snapshot()
-                snapshot["room_id"] = last_room_id if last_room_id is not None else ""
                 msg = json.dumps({"type": "snapshot", "data": snapshot})
                 dead = set()
                 for ws in list(_ws_clients):  # Copy set to avoid mutation during iteration
@@ -139,14 +138,6 @@ async def api_import(request):
     except Exception as e:
         return web.json_response({"error": str(e)}, status=400)
 
-last_room_id = None
-
-async def api_room(request):
-    return web.json_response({
-        "success": True,
-        "room_id": last_room_id if last_room_id is not None else ""
-    })
-
 def create_app() -> web.Application:
     """Create the aiohttp web application."""
     app = web.Application()
@@ -159,7 +150,6 @@ def create_app() -> web.Application:
     app.router.add_get("/api/export", api_export)
     app.router.add_post("/api/import", api_import)
     app.router.add_get("/ws", ws_handler)
-    app.router.add_get("/room", api_room)
 
     # Static files
     if os.path.exists(STATIC_DIR):
