@@ -55,7 +55,6 @@ async def ws_handler(request):
     try:
         # Send initial snapshot
         snapshot = dashboard_state.get_snapshot()
-        snapshot["room_id"] = last_room_id if last_room_id is not None else ""
         await ws.send_json({"type": "snapshot", "data": snapshot})
 
         # Keep connection alive — listen for client messages
@@ -136,6 +135,7 @@ async def api_import(request):
     except Exception as e:
         return web.json_response({"error": str(e)}, status=400)
 
+
 def create_app() -> web.Application:
     """Create the aiohttp web application."""
     app = web.Application()
@@ -158,6 +158,7 @@ def create_app() -> web.Application:
     app.on_cleanup.append(stop_push_loop)
 
     return app
+
 
 async def start_dashboard(port: int = 8080):
     """Start the dashboard server (non-blocking)."""
