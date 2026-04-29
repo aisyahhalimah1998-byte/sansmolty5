@@ -29,13 +29,13 @@ log = get_logger(__name__)
 
 # ── Weapon stats from combat-items.md ─────────────────────────────────
 WEAPONS = {
-    "fist": {"bonus": 5, "range": 0},
-    "dagger": {"bonus": 20, "range": 0},
-    "sword": {"bonus": 40, "range": 0},
+    "fist": {"bonus": 0, "range": 0},
+    "dagger": {"bonus": 80, "range": 0},
+    "sword": {"bonus": 90, "range": 0},
     "katana": {"bonus": 75, "range": 0},
-    "bow": {"bonus": 25, "range": 2},
-    "pistol": {"bonus": 30, "range": 2},
-    "sniper": {"bonus": 100, "range": 2},
+    "bow": {"bonus": 75, "range": 1},
+    "pistol": {"bonus": 85, "range": 1},
+    "sniper": {"bonus": 95, "range": 2},
 }
 
 WEAPON_PRIORITY = ["katana", "sniper", "sword", "pistol", "dagger", "bow", "fist"]
